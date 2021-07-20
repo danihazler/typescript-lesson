@@ -8,7 +8,7 @@ interface IProps {
 }
 
 export const AddToList: React.FC<IProps> = ({ people, setPeople }) => {
-    const [input, setInput] = useState( {
+    const [input, setInput] = useState({
         name: '',
         image: '',
         addPeople: '',
@@ -23,15 +23,25 @@ export const AddToList: React.FC<IProps> = ({ people, setPeople }) => {
     }
 
     const handleAddToList = (): void => {
+        if(!input.name) return;
+
         setPeople([
             ...people,  
             {
                 name: input.name,
-                addPeople: parseInt(input.addPeople),
-                image: input.image,
+                addPeople: input.addPeople ? parseInt(input.addPeople) : 0,
+                image: input.image ? input.image : "https://picsum.photos/id/237/60",
                 note: input.note
             }
-        ])
+        ]);
+
+        //Clean fields
+        setInput({
+            name: '',
+            image: '',
+            addPeople: '',
+            note: ''
+        });
     }
 
     return (
