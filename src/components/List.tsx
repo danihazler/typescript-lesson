@@ -1,11 +1,11 @@
 import React from 'react';
 import { IPeople } from '../App'; 
 
-interface Props {
-    people?: IPeople[]
+interface IProps {
+    people: IPeople['people']
 }
 
-export const List: React.FC<Props> = ({ people }) => {
+export const List: React.FC<IProps> = ({ people }) => {
 
     if(!people) return <h2>There's no one in your list yet.</h2>
 
@@ -13,7 +13,7 @@ export const List: React.FC<Props> = ({ people }) => {
         <ul>
             {people?.map(person => {
                 return (
-                    <li className="List">
+                    <li key={person.name} className="List">
                         <div className="List-header">
                             <img className="List-img" src={person.image} alt={`${person.name}`} />
                             <h2>{person.name}</h2>
